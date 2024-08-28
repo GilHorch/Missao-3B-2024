@@ -2,7 +2,7 @@ const modalidades = ["Ginástica", "Judô", "Surfe", "Vôlei"];
 
 //Com base na constante modalidade, 
 //Coloque o número que represente o esporte do seu grupo
-const escolha = ?;
+const escolha = 3;
 
 document.querySelector('body').style.backgroundImage = "url('img/" + modalidades[escolha] + ".png')";
 document.querySelector('title').textContent = "Missão Olímpica | " + modalidades[escolha];
@@ -15,6 +15,7 @@ const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 
 let atual = 0;
+let pontos = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
