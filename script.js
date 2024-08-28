@@ -116,4 +116,7 @@ function respostaSelecionada(opcaoSelecionada) {
     atual++;
     mostraPergunta();
 }//Faltou a chave no final
+
+
+
     mostraPergunta();
