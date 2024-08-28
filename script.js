@@ -115,5 +115,5 @@ function respostaSelecionada(opcaoSelecionada) {
     historiaFinal += afirmacoes + " ";
     atual++;
     mostraPergunta();
-
+}//Faltou a chave no final
     mostraPergunta();
