@@ -47,7 +47,7 @@ const perguntas = [
                 texto: "Faz um toque surpresa para o fundo da quadra adversária.",
                 afirmacao: "O toque surpresa para o fundo da quadra adversária foi interceptado. Ponto para o adversário.",
                 pontos: 0
-            }            
+            }
         ]
     },
     {
@@ -82,19 +82,20 @@ const perguntas = [
     }
 ];
 
-const atual = 0;
+//const atual = 0;
+let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
-function mostraPergunta(){
+function mostraPergunta() {
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
     mostraAlternativas();
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas){
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativas.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
@@ -115,4 +116,4 @@ function respostaSelecionada(opcaoSelecionada) {
     atual++;
     mostraPergunta();
 
-mostraPergunta();
+    mostraPergunta();
