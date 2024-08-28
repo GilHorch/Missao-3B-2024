@@ -82,41 +82,42 @@ const perguntas = [
     }
 ];
 
-const atual = 0;
-//let atual = 0;
+let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
-function mostraPergunta() {
+function mostraPergunta(){
+    if(atual >= perguntas.length){
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
+    textoResultado.textContent = "";
     mostraAlternativas();
 }
 
-function mostraAlternativas() {
-    for (const alternativa of perguntaAtual.alternativas) {
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas){
         const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativas.texto;
+        botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
         caixaAlternativas.appendChild(botaoAlternativas)
     }
 }
 
-/*function respostaSelecionada(opcaoSelecionada){
+function respostaSelecionada(opcaoSelecionada){
     const afirmacao = opcaoSelecionada.afirmacao;
-    historiaFinal =+ afirmacao;
+    historiaFinal += afirmacao + " ";
     atual++;
     mostraPergunta();
-}*/
+}
 
-function respostaSelecionada(opcaoSelecionada) {
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
-    atual++;
-    mostraPergunta();
-}//Faltou a chave no final
+function mostraResultado(){
+    caixaPerguntas.textContent = "Suas ações mudam o mundo...";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent  = "";
+}
 
-
-
-    mostraPergunta();
+mostraPergunta(); 
