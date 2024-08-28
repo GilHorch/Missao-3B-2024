@@ -1,105 +1,40 @@
+const modalidades = ["Ginástica", "Judô", "Surfe", "Vôlei"];
+
+//Com base na constante modalidade, 
+//Coloque o número que represente o esporte do seu grupo
+const escolha = ?;
+
+document.querySelector('body').style.backgroundImage = "url('img/" + modalidades[escolha] + ".png')";
+document.querySelector('title').textContent = "Missão Olímpica | " + modalidades[escolha];
+document.querySelector('h1').innerHTML = "Missão Olímpica <br> " + modalidades[escolha];
+
 const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 
-const perguntas = [
-    {
-        enunciado: "Você está no saque, qual é a sua estratégia?",
-        alternativas: [
-            {
-                texto: "Sacar uma bola forte e rápida.",
-                afirmacao: "O saque forte e rápido passou a bola pelo bloqueio e tocou o chão da quadra adversária. Ponto para seu time!",
-                pontos: 1
-            },
-            {
-                texto: "Sacar uma bola curta e lenta.",
-                afirmacao: "O saque curto e lento foi levantado pelo adversário, resultando em um ataque bem-sucedido. Ponto para o adversário.",
-                pontos: 0
-            }
-        ]
-    },
-    {
-        enunciado: "O adversário fez um ataque forte. O que você faz?",
-        alternativas: [
-            {
-                texto: "Tenta fazer um bloqueio duplo.",
-                afirmacao: "O bloqueio duplo foi eficiente e a bola voltou para a quadra adversária. Ponto para seu time!",
-                pontos: 1
-            },
-            {
-                texto: "Faz uma defesa baixa e rápida.",
-                afirmacao: "A defesa baixa e rápida foi boa, mas a bola foi para fora. Ponto para o adversário.",
-                pontos: 0
-            }
-        ]
-    },
-    {
-        enunciado: "Seu time está organizando um ataque. Qual é a sua jogada?",
-        alternativas: [
-            {
-                texto: "Levanta a bola para o atacante principal.",
-                afirmacao: "O levantamento para o atacante principal resultou em um ataque certeiro. Ponto para seu time!",
-                pontos: 1
-            },
-            {
-                texto: "Faz um toque surpresa para o fundo da quadra adversária.",
-                afirmacao: "O toque surpresa para o fundo da quadra adversária foi interceptado. Ponto para o adversário.",
-                pontos: 0
-            }
-        ]
-    },
-    {
-        enunciado: "A bola está vindo alta e perto da rede. O que você faz?",
-        alternativas: [
-            {
-                texto: "Tenta um ataque potente.",
-                afirmacao: "O ataque potente resultou em uma bola fora. Ponto para o adversário.",
-                pontos: 0
-            },
-            {
-                texto: "Faz um toque sutil para enganar o bloqueio.",
-                afirmacao: "O toque sutil enganou o bloqueio e a bola caiu na quadra adversária. Ponto para seu time!",
-                pontos: 1
-            }
-        ]
-    },
-    {
-        enunciado: "Você está recebendo o saque do adversário. Como você responde?",
-        alternativas: [
-            {
-                texto: "Recebe a bola com um passe alto para organizar a jogada.",
-                afirmacao: "O passe alto organizou a jogada e resultou em um bom ataque. Ponto para seu time!",
-                pontos: 1
-            },
-            {
-                texto: "Recebe a bola com uma manchete baixa e rápida.",
-                afirmacao: "A manchete baixa e rápida resultou em um erro e a bola não passou. Ponto para o adversário.",
-                pontos: 0
-            }
-        ]
-    }
-];
-
 let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
-function mostraPergunta(){
-    if(atual >= perguntas.length){
+//Assim como a variável atual (acima)
+//Crie uma variável com o nome pontos que inicie com 0
+
+
+function mostraPergunta() {
+    if (atual >= perguntas[escolha].length) {
         mostraResultado();
         return;
     }
-    perguntaAtual = perguntas[atual];
+    perguntaAtual = perguntas[escolha][atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
-    textoResultado.textContent = "";
     mostraAlternativas();
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas){
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
@@ -107,17 +42,57 @@ function mostraAlternativas(){
     }
 }
 
-function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes+ " ";
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacao = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacao + " ";
     atual++;
+    pontos += opcaoSelecionada.pontos;
+    console.log(pontos);
     mostraPergunta();
 }
 
-function mostraResultado(){
-    caixaPerguntas.textContent = "Suas ações mudam o mundo...";
+function mostraResultado() {
     textoResultado.textContent = historiaFinal;
-    caixaAlternativas.textContent  = "";
+    caixaPerguntas.textContent = "Resultado";
+    caixaAlternativas.textContent = "";
+
+    podiumMedalhas();
+    // chame a função podiumMedalhas aqui
+
 }
+
+//crie uma função podiumMedalhas
+function podiumMedalhas(){
+    if (pontos == 3) {
+        caixaPrincipal.style.backgroundImage = "url('img/bronze.png')";
+        caixaPerguntas.textContent = "Resultado da competição: 3 pontos é BRONZE!";
+    }
+
+    else if (pontos == 4) {
+
+        caixaPrincipal.style.backgroundImage = "url('img/prata.png')";
+        caixaPerguntas.textContent = "Resultado da competição: 4 pontos é PRATA!";
+    }
+
+};
+//E verifique a quantidade de pontos
+//  - Se pontos igual a 3 ganha bronze, dentro dessa condicional:
+//    Utilize a linha de código abaixo para modificar o CSS e inserir uma medalha
+//    caixaPrincipal.style.backgroundImage = "url('img/bronze.png')";
+//    altere o textContent do caixaPerguntas para "Resultado da competição: 3 pontos é BRONZE!"
+//  - Se pontos igual a 4 ganha prata
+//    Utilize a linha de código abaixo para modificar o CSS e inserir uma medalha
+//    caixaPrincipal.style.backgroundImage = "url('img/prata.png')";
+//    altere o textContent do caixaPerguntas para "Resultado da competição: 4 pontos é PRATA!"
+//  - Se pontos igual a 5 ganha ouro
+//    Utilize a linha de código abaixo para modificar o CSS e inserir uma medalha
+//    caixaPrincipal.style.backgroundImage = "url('img/ouro.png')";
+//    altere o textContent do caixaPerguntas para "Resultado da competição: 5 pontos é OURO!"
+//  - Se pontos menor que 3
+//    Utilize a linha de código abaixo para modificar o CSS e inserir uma medalha
+//    caixaPrincipal.style.backgroundImage = "url('img/perdeu.png')";
+//    altere o textContent do caixaPerguntas para "Resultado da competição: PERDEU!";
+//2 Dentro de cada SE altere o conteúdo de texto de caixaPerguntas exemplo
+//     Quando ouro coloque "Resultado da competição: 3 pontos é BRONZE!";
 
 mostraPergunta(); 
