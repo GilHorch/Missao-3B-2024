@@ -35,6 +35,8 @@ function mostraPergunta() {
 }
 
 function mostraAlternativas() {
+    historiaFinal;
+    caixaPerguntas.textContent = "Resultado"
     for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
@@ -53,8 +55,7 @@ function respostaSelecionada(opcaoSelecionada) {
 }
 
 function mostraResultado() {
-    textoResultado.textContent = historiaFinal;
-    caixaPerguntas.textContent = "Resultado";
+    textoResultado.textContent = o";
     caixaAlternativas.textContent = "";
 
     podiumMedalhas();
