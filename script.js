@@ -58,7 +58,7 @@ function mostraResultado() {
     textoResultado.textContent = o";
     caixaAlternativas.textContent = "";
 
-    podiumMedalhas();
+   // podiumMedalhas();
     // chame a função podiumMedalhas aqui
 
 }
